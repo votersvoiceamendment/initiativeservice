@@ -43,6 +43,11 @@ public class InitiativeController {
         return this.initiativeService.getInitiativeTitlesOrderByUserVotesAndState(userId, state.toUpperCase());
     }
 
+    @GetMapping(path = "{initiativeId}/core")
+    public InitiativeCoreProjection getInitiativeCore(@PathVariable("initiativeId") Long initiativeId) {
+        return this.initiativeService.getInitiativeCore(initiativeId);
+    }
+
     @GetMapping(path = "{initiativeId}")
     public Initiative getInitiative(@PathVariable("initiativeId") Long initiativeId) {
         return this.initiativeService.getInitiative(initiativeId);

@@ -47,6 +47,12 @@ public class InitiativeService {
         return allInitiatives;
     }
 
+    public InitiativeCoreProjection getInitiativeCore(Long initiativeId) {
+        return this.initiativeRepository.findInitiativeBaseById(initiativeId).orElseThrow(() -> {
+            return new IllegalStateException("Initiative with the id "+initiativeId+" does not exist.");
+        });
+    }
+
     public Initiative getInitiative(Long initiativeId) {
         return this.initiativeRepository.findById(initiativeId).orElseThrow(() -> {
             return new IllegalStateException("Initiative with the id "+initiativeId+" does not exist.");

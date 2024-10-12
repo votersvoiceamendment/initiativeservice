@@ -6,11 +6,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface InitiativeRepository extends JpaRepository<Initiative, Long> {
 
     List<Initiative> findAllByOrderByIdAsc();
+
+    @Query("SELECT i FROM Initiative i WHERE i.id = :initiativeId")
+    Optional<InitiativeCoreProjection> findInitiativeBaseById(@Param("initiativeId") Long initiativeId);
 
     @Query("SELECT i.id AS id, i.state AS state, i.title AS title FROM Initiative i ORDER BY i.id ASC")
     List<InitiativeTitleProjection> findAllInitiativesTitleOrderedIdAsc();
