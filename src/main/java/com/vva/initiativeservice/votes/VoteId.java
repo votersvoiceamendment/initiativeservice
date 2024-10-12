@@ -15,10 +15,12 @@ public class VoteId implements Serializable {
     // @NotBlank(message = "vvaUserId for comment cannot be null or empty")
     @Size(max = 36, min = 36, message = "vvaUserId for vote must be 36 characters")
     @Column(length = 36, updatable = false)
-    private final String vvaUserId;
+    private String vvaUserId;
 
-    @Column(name = "initiative_id", updatable = false)
-    private final Long initiative;
+    private Long initiative;
+
+    public VoteId() {
+    }
 
     public VoteId(String vvaUserId, Long initiative) {
         this.vvaUserId = vvaUserId;

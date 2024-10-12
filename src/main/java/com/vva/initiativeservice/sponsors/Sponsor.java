@@ -16,7 +16,8 @@ public class Sponsor {
     private SponsorId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "initiative_id", referencedColumnName = "id", nullable = false)
+    @MapsId("initiativeId")
+    @JoinColumn(name = "initiativeId", referencedColumnName = "id", nullable = false)
     @JsonIgnore
     private Initiative initiative;
 
@@ -71,5 +72,20 @@ public class Sponsor {
 
     public void setLeadSponsor(boolean leadSponsor) {
         this.leadSponsor = leadSponsor;
+    }
+
+    public void setInitiative(Initiative initiative) {
+        this.initiative = initiative;
+    }
+
+    @Override
+    public String toString() {
+        return "Sponsor{" +
+                "id=" + id +
+                ", initiativeId=" + initiative.getId() +
+                ", leadSponsor=" + leadSponsor +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

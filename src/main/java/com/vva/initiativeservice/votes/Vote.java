@@ -17,7 +17,8 @@ public class Vote {
     private VoteId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "initiative_id", referencedColumnName = "id", nullable = false)
+    @MapsId("initiativeId")
+    @JoinColumn(name = "initiativeId", referencedColumnName = "id", nullable = false)
     @JsonIgnore
     private Initiative initiative;
 
@@ -72,5 +73,16 @@ public class Vote {
 
     public void setYesno(boolean yesno) {
         this.yesno = yesno;
+    }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "id=" + id +
+                ", initiativeId=" + initiative.getId() +
+                ", yesno=" + yesno +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

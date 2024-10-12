@@ -1,9 +1,12 @@
 package com.vva.initiativeservice.security;
 
+import com.vva.initiativeservice.logging.RequestLoggingFilter;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,6 +30,15 @@ public class SecurityConfig {
 
     @Value("${AUTH_SECRET}")
     private String secretKey;
+
+//    @Bean
+//    public FilterRegistrationBean<RequestLoggingFilter> loggingFilter() {
+//        FilterRegistrationBean<RequestLoggingFilter> registrationBean = new FilterRegistrationBean<>();
+//        registrationBean.setFilter(new RequestLoggingFilter());
+//        registrationBean.addUrlPatterns("/*"); // Apply to all URL patterns
+//        registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE); // Set the order of the filter
+//        return registrationBean;
+//    }
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http, CorsConfigurationSource corsConfigurationSource) throws Exception {

@@ -1,4 +1,4 @@
-package com.vva.initiativeservice.logging;//package com.vva.organizationservice.logging;
+//package com.vva.initiativeservice.logging;
 //
 //import jakarta.servlet.Filter;
 //import jakarta.servlet.FilterChain;

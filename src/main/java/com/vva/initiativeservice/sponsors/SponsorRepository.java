@@ -1,4 +1,6 @@
 package com.vva.initiativeservice.sponsors;
 
-public interface SponsorRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SponsorRepository extends JpaRepository<Sponsor, SponsorId> {
 }

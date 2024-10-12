@@ -14,22 +14,28 @@ public class SponsorId {
     @NotBlank(message = "OrganizationId for sponsor cannot be null or empty")
     @Size(min=36, max = 36, message = "OrganizationId for sponsor must be 36 characters")
     @Column(length = 36, updatable = false)
-    private final String organizationId;
+    private String organizationId;
 
-    @Column(name = "initiative_id", updatable = false)
-    private final Long initiative;
+    private Long initiativeId;
 
-    public SponsorId(String organizationId, Long initiative) {
+    public SponsorId() {
+    }
+
+    public SponsorId(String organizationId, Long initiativeId) {
         this.organizationId = organizationId;
-        this.initiative = initiative;
+        this.initiativeId = initiativeId;
     }
 
     public @NotBlank(message = "OrganizationId for sponsor cannot be null or empty") @Size(min = 36, max = 36, message = "OrganizationId for sponsor must be 36 characters") String getOrganizationId() {
         return organizationId;
     }
 
-    public Long getInitiative() {
-        return initiative;
+    public Long getInitiativeId() {
+        return initiativeId;
+    }
+
+    public void setInitiativeId(Long initiativeId) {
+        this.initiativeId = initiativeId;
     }
 
     @Override
@@ -38,11 +44,19 @@ public class SponsorId {
         if (!(o instanceof SponsorId)) return false;
         SponsorId sponsorId = (SponsorId) o;
         return Objects.equals(this.organizationId, sponsorId.organizationId) &&
-                Objects.equals(this.initiative, sponsorId.initiative);
+                Objects.equals(this.initiativeId, sponsorId.initiativeId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.organizationId, this.initiative);
+        return Objects.hash(this.organizationId, this.initiativeId);
+    }
+
+    @Override
+    public String toString() {
+        return "SponsorId{" +
+                "organizationId='" + organizationId + '\'' +
+                ", initiativeId=" + initiativeId +
+                '}';
     }
 }

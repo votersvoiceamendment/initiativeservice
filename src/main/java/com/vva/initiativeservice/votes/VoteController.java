@@ -1,5 +1,6 @@
 package com.vva.initiativeservice.votes;
 
+import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,14 +18,14 @@ public class VoteController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @GetMapping(path = "total")
+    @GetMapping(path = "/total")
     public Long getTotalVoteCount() {
         return this.voteService.getTotalVoteCount();
     }
 
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @GetMapping(path = "summary")
+    @GetMapping(path = "/summary")
     public TotalVotesSummary getSummaryVoteCount() {
         return this.voteService.getVoteCountSummary();
     }
@@ -35,7 +36,7 @@ public class VoteController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    @GetMapping(path = "/initiatives/{initiativeId}")
+    @GetMapping(path = "/initiatives/{initiativeId}/user")
     public Vote getUserVoteForInitiative(@PathVariable("initiativeId") Long initiativeId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
@@ -48,7 +49,7 @@ public class VoteController {
     @PostMapping(path = "/initiatives/{initiativeId}")
     public void castVote(
             @PathVariable("initiativeId") Long initiativeId,
-            @RequestBody VoteRequest voteRequest
+            @Valid @RequestBody VoteRequest voteRequest
     ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();

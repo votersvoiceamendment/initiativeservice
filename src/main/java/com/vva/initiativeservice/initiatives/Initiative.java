@@ -17,13 +17,13 @@ public class Initiative {
 
     @Id
     @SequenceGenerator(
-            name = "post_sequence",
-            sequenceName = "post_sequence",
+            name = "initiative_sequence",
+            sequenceName = "initiative_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "post_sequence"
+            generator = "initiative_sequence"
     )
     private long id;
 
@@ -34,7 +34,9 @@ public class Initiative {
 
     @NotBlank(message = "State cannot be null or empty")
     @Size(max = 2, message = "State code cannot be more than 2 characters")
-    @Column(length = 2, nullable = false, columnDefinition = "CHAR(2) DEFAULT 'US'")
+    // Hibernate no like
+//    @Column(length = 2, nullable = false, columnDefinition = "CHAR(2) DEFAULT 'US'") NO LIKE
+    @Column(length = 2, nullable = false)
     private String state = "US";
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
@@ -157,6 +159,14 @@ public class Initiative {
         return conText;
     }
 
+    public List<Sponsor> getSponsors() {
+        return sponsors;
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -211,5 +221,28 @@ public class Initiative {
 
     public void setConText(@Size(max = 2000, message = "Con_text description cannot be more than 2000 characters") String conText) {
         this.conText = conText;
+    }
+
+    @Override
+    public String toString() {
+        return "Initiative{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", state='" + state + '\'' +
+                ", version=" + version +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", approvedfordisplay=" + approvedfordisplay +
+                ", archived=" + archived +
+                ", barcode='" + barcode + '\'' +
+                ", proOrganizationId='" + proOrganizationId + '\'' +
+                ", proText='" + proText + '\'' +
+                ", conOrganizationId='" + conOrganizationId + '\'' +
+                ", conText='" + conText + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", sponsors=" + sponsors +
+                ", votes=" + votes +
+                '}';
     }
 }
