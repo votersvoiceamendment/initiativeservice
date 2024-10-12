@@ -1,6 +1,7 @@
 package com.vva.initiativeservice.initiatives;
 
 
+import com.vva.initiativeservice.comments.Comment;
 import com.vva.initiativeservice.sponsors.Sponsor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -91,6 +92,9 @@ public class Initiative {
     @OneToMany(mappedBy = "initiative", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Vote> votes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "initiative", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Comment> comments = new ArrayList<>();
+
     // This makes the createdAt and updatedAt be the time when the row is made
     @PrePersist
     protected void onCreate() {
@@ -165,6 +169,10 @@ public class Initiative {
 
     public List<Vote> getVotes() {
         return votes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
     }
 
     public LocalDateTime getCreatedAt() {

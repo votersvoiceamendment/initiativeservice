@@ -71,8 +71,8 @@ public class Comment {
         this.text = text;
     }
 
-    public Comment(Initiative post, String vvaUserId, String vvaUserName, String text) {
-        this.initiative = post;
+    public Comment(Initiative initiative, String vvaUserId, String vvaUserName, String text) {
+        this.initiative = initiative;
         this.vvaUserId = vvaUserId;
         this.vvaUserName = vvaUserName;
         this.text = text;
@@ -99,7 +99,7 @@ public class Comment {
         return id;
     }
 
-    public Initiative getPost() {
+    public Initiative getInitiative() {
         return initiative;
     }
 
@@ -137,6 +137,17 @@ public class Comment {
         this.text = text;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Comment{" +
+//                "id=" + id +
+//                ", vvaUserId='" + vvaUserId + '\'' +
+//                ", vvaUserName='" + vvaUserName + '\'' +
+//                ", text='" + text + '\'' +
+//                ", createdAt=" + createdAt +
+//                ", updatedAt=" + updatedAt +
+//                '}';
+//    }
 }
 
 // PRISMA SCHEMA
