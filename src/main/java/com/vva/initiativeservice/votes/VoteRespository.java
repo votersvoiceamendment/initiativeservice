@@ -23,10 +23,10 @@ public interface VoteRespository extends JpaRepository<Vote, VoteId> {
     // Get all the votes for an InitiativeId
     Optional<List<Vote>> findByIdInitiativeId(Long initiativeId);
 
-    @Query("SELECT v.id.initiativeId AS initiativeId, i.state AS state, i.title AS title, COUNT(v) AS totalVotes " +
-            "FROM Vote v " +
-            "JOIN Initiative i ON v.id.initiativeId = i.id " +
-            "GROUP BY v.id.initiativeId, i.state, i.title")
+    @Query("SELECT i.id AS initiativeId, i.state AS state, i.title AS title, " +
+            "COUNT(v.id.initiativeId) AS totalVotes " +
+            "FROM Initiative i LEFT JOIN Vote v ON v.id.initiativeId = i.id " +
+            "GROUP BY i.id, i.state, i.title")
     List<InitiativeMetaAndVoteCount> findAllInitiativeVoteCounts();
 
 }
