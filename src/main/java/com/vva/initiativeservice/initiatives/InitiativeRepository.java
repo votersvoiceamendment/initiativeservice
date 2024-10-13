@@ -13,6 +13,12 @@ public interface InitiativeRepository extends JpaRepository<Initiative, Long> {
 
     List<Initiative> findAllByOrderByIdAsc();
 
+
+    // Find the initiative AND have the comments ordered. CAN USE
+//    @Query("SELECT i FROM Initiative i LEFT JOIN FETCH i.comments c WHERE i.id = :initiativeId ORDER BY c.createdAt DESC")
+//    Optional<Initiative> findInitiativeWithOrderedComments(@Param("initiativeId") Long initiativeId);
+
+
     @Query("SELECT i FROM Initiative i WHERE i.id = :initiativeId")
     Optional<InitiativeCoreProjection> findInitiativeBaseById(@Param("initiativeId") Long initiativeId);
 

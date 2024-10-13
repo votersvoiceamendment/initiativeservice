@@ -4,5 +4,5 @@ public interface InitiativeMetaAndVoteCount {
     Long getInitiativeId();
     String getState();
     String getTitle();
-    Long getVoteCount();
+    Long getTotalVotes();
 }

@@ -47,6 +47,10 @@ public class Vote {
     public Vote() {
     }
 
+    public Vote(String vvaUserId, Long initiativeId) {
+        this.id = new VoteId(vvaUserId, initiativeId);
+    }
+
     public VoteId getId() {
         return id;
     }
@@ -73,6 +77,10 @@ public class Vote {
 
     public void setYesno(boolean yesno) {
         this.yesno = yesno;
+    }
+
+    public void setInitiative(Initiative initiative) {
+        this.initiative = initiative;
     }
 
     @Override

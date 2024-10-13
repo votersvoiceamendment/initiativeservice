@@ -1,12 +1,12 @@
 package com.vva.initiativeservice.votes;
 
 // No setters in this DTO. It can only be created and then retrieved from
-public class VoteBreakdown {
+public class VoteCount {
 
     public Long yes;
     public Long no;
 
-    public VoteBreakdown(Long yes, Long no) {
+    public VoteCount(Long yes, Long no) {
         this.yes = yes;
         this.no = no;
     }

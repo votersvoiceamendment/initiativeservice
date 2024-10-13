@@ -30,7 +30,9 @@ public class InitiativeController {
         return this.initiativeService.getInitiativesTitleOrderById();
     }
 
-//    @PreAuthorize("hasAuthority('ROLE_USER')")
+    // This is a strange labeled endpoint. It is for returning the list of initiatives
+    // in order by initiatives in the users state and ones they have voted on
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping(path = "/titleOrderByUserVotesAndState/{state}")
     public List<InitiativeTitleProjection> getInitiativeTitlesOrderByUserVotesAndState(@PathVariable("state") String state) {
 

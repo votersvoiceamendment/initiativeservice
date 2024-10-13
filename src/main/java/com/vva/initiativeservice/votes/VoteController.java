@@ -7,6 +7,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/v1/votes")
 public class VoteController {
@@ -24,14 +26,19 @@ public class VoteController {
     }
 
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(path = "/summary")
     public TotalVotesSummary getSummaryVoteCount() {
         return this.voteService.getVoteCountSummary();
     }
 
     @GetMapping(path = "/initiatives/{initiativeId}")
-    public VoteBreakdown getInitiativeVoteCount(@PathVariable("initiativeId") Long initiativeId) {
+    public List<Vote> getInitiativeVotes(@PathVariable("initiativeId") Long initiativeId) {
+        return this.voteService.getInitiativeVotes(initiativeId);
+    }
+
+    @GetMapping(path = "/initiatives/{initiativeId}/count")
+    public VoteCount getInitiativeVoteCount(@PathVariable("initiativeId") Long initiativeId) {
         return this.voteService.getInitiativeVoteCount(initiativeId);
     }
 
@@ -46,7 +53,7 @@ public class VoteController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    @PostMapping(path = "/initiatives/{initiativeId}")
+    @PostMapping(path = "/initiatives/{initiativeId}/user")
     public void castVote(
             @PathVariable("initiativeId") Long initiativeId,
             @Valid @RequestBody VoteRequest voteRequest
@@ -56,5 +63,18 @@ public class VoteController {
         String userId = jwt.getSubject();
 
         this.voteService.castVote(userId, initiativeId, voteRequest.isYesno());
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PutMapping(path = "/initiatives/{initiativeId}/user")
+    public void updateVote(
+            @PathVariable("initiativeId") Long initiativeId,
+            @Valid @RequestBody VoteRequest voteRequest
+    ) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+        String userId = jwt.getSubject();
+
+        this.voteService.updateVote(userId, initiativeId, voteRequest.isYesno());
     }
 }

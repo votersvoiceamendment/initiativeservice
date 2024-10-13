@@ -17,22 +17,22 @@ public class VoteId implements Serializable {
     @Column(length = 36, updatable = false)
     private String vvaUserId;
 
-    private Long initiative;
+    private Long initiativeId;
 
     public VoteId() {
     }
 
-    public VoteId(String vvaUserId, Long initiative) {
+    public VoteId(String vvaUserId, Long initiativeId) {
         this.vvaUserId = vvaUserId;
-        this.initiative = initiative;
+        this.initiativeId = initiativeId;
     }
 
     public @Size(max = 36, min = 36, message = "vvaUserId for vote must be 36 characters") String getVvaUserId() {
         return vvaUserId;
     }
 
-    public Long getInitiative() {
-        return initiative;
+    public Long getInitiativeId() {
+        return initiativeId;
     }
 
     @Override
@@ -41,11 +41,19 @@ public class VoteId implements Serializable {
         if (!(o instanceof VoteId)) return false;
         VoteId voteId = (VoteId) o;
         return Objects.equals(this.vvaUserId, voteId.vvaUserId) &&
-                Objects.equals(this.initiative, voteId.initiative);
+                Objects.equals(this.initiativeId, voteId.initiativeId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.vvaUserId, this.initiative);
+        return Objects.hash(this.initiativeId, this.initiativeId);
+    }
+
+    @Override
+    public String toString() {
+        return "VoteId{" +
+                "vvaUserId='" + vvaUserId + '\'' +
+                ", initiativeId=" + initiativeId +
+                '}';
     }
 }
