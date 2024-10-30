@@ -33,4 +33,4 @@ ENV AUTH_SECRET=${AUTH_SECRET}
 ENV ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
 
 # Run the Spring Boot application
-CMD ["java", "-jar", "target/initiativeservice-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/initiativeservice.jar"]
