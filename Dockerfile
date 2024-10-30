@@ -1,6 +1,4 @@
-# Use an official OpenJDK runtime as a parent image
-#FROM openjdk:17-jdk-alpine
-#Need because on your mac
+# Use Maven image with OpenJDK for building the application
 FROM maven:3.8.4-openjdk-17 AS build
 
 # Set the working directory inside the container
