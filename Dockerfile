@@ -14,6 +14,16 @@ RUN mvn dependency:resolve
 COPY . .
 RUN mvn clean package -DskipTests
 
+# Use a lightweight OpenJDK image for running the application
+FROM openjdk:17-jdk-alpine
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the built jar file from the build stage
+COPY --from=build /app/target/initiativeservice-0.0.1-SNAPSHOT.jar /app/initiativeservice.jar
+
+
 # Expose the port that the service will run on
 EXPOSE 8080
 
